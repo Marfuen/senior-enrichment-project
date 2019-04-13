@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import {fetchStudents} from './store';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class Students extends Component {
   componentDidMount(){
     this.props.getStudents();
   }
   render(){
-    console.log(this.props.students);
     return(
       <ul>
         {this.props.students.map(student =>
-          <li key={student.id}>{student.firstName} {student.lastName}</li>
+          <li key={student.id}><Link to={`/students/${student.id}`}>{student.firstName} {student.lastName}</Link></li>
         )}
       </ul>
     )
@@ -24,9 +24,9 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({students}) => {
   return {
-    students: state.students,
+    students
   }
 }
 
