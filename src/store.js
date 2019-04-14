@@ -11,6 +11,22 @@ const GOT_CAMPUSES = 'GOT_CAMPUSES';
 const GOT_STUDENTS = 'GOT_STUDENTS';
 const CREATED_STUDENT = 'CREATED_STUDENT';
 const CREATED_CAMPUS = 'CREATED_CAMPUS';
+const REMOVED_STUDENT = 'REMOVED_STUDENT';
+const REMOVED_CAMPUS = 'REMOVED_CAMPUS';
+
+const destroyedCampus = (campus) => {
+  return {
+    type: REMOVED_CAMPUS,
+    campus,
+  };
+};
+
+const destroyedStudent = (student) => {
+  return {
+    type: REMOVED_STUDENT,
+    student,
+  }
+}
 
 const gotCampuses = (campuses) => {
   return {
@@ -37,6 +53,24 @@ const gotStudents = (students) => {
   return {
     type: GOT_STUDENTS,
     students,
+  }
+}
+
+export const removeCampus = (id) => {
+  return dispatch => {
+    return axios.delete(`/api/campuses/${id}`)
+      .then(res => res.data)
+      .then(campus => dispatch(destroyedCampus(campus)))
+      .then(() => dispatch(fetchCampuses()));
+  }
+}
+
+export const removeStudent = (id) => {
+  return dispatch => {
+    return axios.delete(`/api/students/${id}`)
+      .then(res => res.data)
+      .then(student => dispatch(destroyedStudent(student)))
+      .then(() => dispatch(fetchStudents()));
   }
 }
 
@@ -82,6 +116,10 @@ const reducer = (state = initialState, action) => {
       return {...state, campuses: [...state.campuses, action.campus]}
     case CREATED_STUDENT:
       return {...state, students: [...state.students, action.student]}
+    case REMOVED_CAMPUS:
+      return {...state, campuses: [...state.campuses.filter(campus => campus.id !== action.campus.id)]}
+    case REMOVED_STUDENT:
+      return {...state, students: [...state.students.filter(student => student.id !== action.student.id)]}
     default:
       return state;
   }

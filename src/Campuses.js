@@ -1,25 +1,31 @@
 import React, {Component} from 'react';
-import {fetchCampuses} from "./store";
+import {removeCampus} from "./store";
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 
 
 class Campuses extends Component {
-  componentDidMount(){
-    this.props.getCampuses();
-  }
   render(){
     return(
       <div className="card-columns">
         {this.props.campuses.map(campus =>
-          <Link key={campus.id} to={`/campuses/${campus.id}`}>
-            <div className="card">
+            <div className="card" key={campus.id}>
             <img src={campus.imageUrl} className="card-img-top" />
               <div className="card-body">
-                <h5 className="card-title">{campus.name}</h5>
+              <div className="container">
+                <div className="row">
+                  <div className="col-sm-8">
+                    <Link to={`/campuses/${campus.id}`}>
+                      <h5 className="card-title">{campus.name}</h5>
+                    </Link>
+                  </div>
+                  <div className="col-sm-4">
+                    <button type="submit" className="btn btn-danger btn-sm" onClick={() => this.props.removeCampus(campus.id)}>Delete</button>
+                  </div>
+                </div>
+                </div>
               </div>
             </div>
-          </Link>
         )}
       </div>
     )
@@ -28,13 +34,13 @@ class Campuses extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getCampuses: () => dispatch(fetchCampuses()),
+    removeCampus: (id) => dispatch(removeCampus(id)),
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({campuses}) => {
   return {
-    campuses: state.campuses,
+    campuses,
   }
 }
 

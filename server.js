@@ -42,6 +42,18 @@ app.post('/api/students', (req,res,next) => {
   .catch(next);
 });
 
+app.delete('/api/campuses/:id', (req,res,next) => {
+  Campus.destroy({where: {id: req.params.id}})
+    .then(campus => res.json(campus))
+    .catch(next);
+});
+
+app.delete('/api/students/:id', (req,res,next) => {
+  Student.destroy({where: {id: req.params.id}})
+    .then(student => res.json(student))
+    .catch(next);
+});
+
 syncAndSeed()
   .then(() => {
     app.listen(port, ()=> console.log(`listening on port http://localhost:${port}`))

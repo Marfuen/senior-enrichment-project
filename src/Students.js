@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import {fetchStudents} from './store';
+import {removeStudent} from './store';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 class Students extends Component {
-  componentDidMount(){
-    this.props.getStudents();
-  }
   render(){
     return(
       <div>
@@ -14,7 +11,14 @@ class Students extends Component {
           <ul className="card-body">
           <h2>Student List: </h2>
           {this.props.students.map(student =>
-            <div key={student.id}><Link to={`/students/${student.id}`}>{student.firstName} {student.lastName}</Link></div>
+            <div key={student.id}>
+              <Link to={`/students/${student.id}`}>
+                {student.firstName} {student.lastName}
+              </Link>
+              <span>
+                <button type="submit" className="btn btn-danger btn-sm" style={{marginLeft: '20px'}} onClick={() => this.props.removeStudent(student.id)}>Remove</button>
+              </span>
+            </div>
           )}
         </ul>
         </div>
@@ -26,7 +30,7 @@ class Students extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getStudents: () => dispatch(fetchStudents()),
+    removeStudent: (id) => dispatch(removeStudent(id)),
   }
 }
 
