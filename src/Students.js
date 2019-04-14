@@ -9,11 +9,17 @@ class Students extends Component {
   }
   render(){
     return(
-      <ul>
-        {this.props.students.map(student =>
-          <li key={student.id}><Link to={`/students/${student.id}`}>{student.firstName} {student.lastName}</Link></li>
-        )}
-      </ul>
+      <div>
+        <div className="card">
+          <ul className="card-body">
+          <h2>Student List: </h2>
+          {this.props.students.map(student =>
+            <div key={student.id}><Link to={`/students/${student.id}`}>{student.firstName} {student.lastName}</Link></div>
+          )}
+        </ul>
+        </div>
+        <Link to="/add/student"><button type="submit" className="btn btn-success" style={{marginTop: '20px'}}>Add Student</button></Link>
+      </div>
     )
   }
 }

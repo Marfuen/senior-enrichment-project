@@ -1,11 +1,10 @@
 import React, {Component} from "react";
-import {withRouter, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 const mapStateToProps = ({campuses, students}, props) => {
   const campus = campuses.find(campus => campus.id === Number(props.match.params.id));
   students = students.filter(student => student.campusId === campus.id);
-
   return {campus, students}
 }
 
@@ -14,6 +13,7 @@ class SingleCampus extends Component {
     const {campus, students} = this.props;
     return(
       <div>
+        {campus ? <div>
         <div className="card">
           <img src={campus.imageUrl} className="card-img-top" />
           <div className="card-body">
@@ -31,7 +31,7 @@ class SingleCampus extends Component {
               </ul>
             </div>
           : <h3>No students go to this school!</h3>
-          }
+          }</div> : <div/>}
       </div>
     )
   }
@@ -39,4 +39,4 @@ class SingleCampus extends Component {
 
 
 
-export default withRouter(connect(mapStateToProps)(SingleCampus));
+export default connect(mapStateToProps)(SingleCampus);
