@@ -37,6 +37,8 @@ app.post('/api/students', (req,res,next) => {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
+    gpa: req.body.gpa,
+    campusId: req.body.campusId,
   })
   .then(student => res.json(student))
   .catch(next);
@@ -52,6 +54,24 @@ app.delete('/api/students/:id', (req,res,next) => {
   Student.destroy({where: {id: req.params.id}})
     .then(student => res.json(student))
     .catch(next);
+});
+
+app.put('/api/students/:id', (req,res,next) => {
+  Student.update(
+    {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      gpa: req.body.gpa,
+      campusId: req.body.campusId,
+    },
+    {
+      returning: true,
+      where: {id: req.params.id}
+    }
+  )
+  .then(([[student]]) => res.json(student))
+  .catch(next);
 });
 
 syncAndSeed()

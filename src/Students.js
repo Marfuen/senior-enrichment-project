@@ -7,6 +7,7 @@ class Students extends Component {
   render(){
     return(
       <div>
+        <Link to="/add/student"><button type="submit" className="btn btn-success" style={{marginBottom: '20px'}}>Add Student</button></Link>
         <div className="card">
           <ul className="card-body">
           <h2>Student List: </h2>
@@ -22,7 +23,6 @@ class Students extends Component {
           )}
         </ul>
         </div>
-        <Link to="/add/student"><button type="submit" className="btn btn-success" style={{marginTop: '20px'}}>Add Student</button></Link>
       </div>
     )
   }

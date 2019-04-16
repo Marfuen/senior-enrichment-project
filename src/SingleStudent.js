@@ -11,12 +11,12 @@ const mapStateToProps = ({campuses, students}, props) => {
 class SingleStudent extends Component {
   render(){
     const {student, campus} = this.props;
-    if(!student || !campus){
+    if(!student){
       return <div/>
     } else {
       return(
         <div>
-          {(student && campus) ?
+          {(student) ?
           <div className="card mb-3">
           <div className="row no-gutters">
             <div className="col-md-4">
@@ -24,11 +24,15 @@ class SingleStudent extends Component {
             </div>
             <div className="col-md-8">
               <div className="card-body">
-                <h4>Currently Attending: <Link to={`/campuses/${campus.id}`}>{campus.name}</Link></h4>
+                {campus ?
+                  <h4>Currently Attending: <Link to={`/campuses/${campus.id}`}>{campus.name}</Link></h4>
+                : <h4>Not attending a school!</h4>
+                }
                 <p>First Name: {student.firstName}</p>
                 <p>Last Name: {student.lastName}</p>
                 <p>email: {student.email}</p>
                 <p>GPA: {student.gpa}</p>
+                <button type="submit" className="btn btn-sm btn-warning"><Link to={`/edit/student/${student.id}`}>Edit</Link></button>
               </div>
             </div>
           </div>

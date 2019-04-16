@@ -26,14 +26,18 @@ class App extends Component {
     return(
       <div>
         <Navbar />
-        <Switch>
-          <Route exact path="/campuses" component={Campuses}/>
-          <Route exact path="/students" component={Students}/>
-          <Route exact path="/campuses/:id" component={SingleCampus}/>
-          <Route exact path="/students/:id" component={SingleStudent}/>
-          <Route exact path="/add/campus" component={CreateCampus}/>
-          <Route exact path="/add/student" component={CreateStudent}/>
-        </Switch>
+        <div className="container">
+          <Switch>
+            <Route exact path="/campuses" component={Campuses}/>
+            <Route exact path="/students" component={Students}/>
+            <Route exact path="/campuses/:id" component={SingleCampus}/>
+            <Route exact path="/students/:id" component={SingleStudent}/>
+            <Route exact path="/add/campus" component={CreateCampus}/>
+            <Route exact path="/edit/campus/:id" component={CreateCampus}/>
+            <Route exact path="/add/student" component={CreateStudent}/>
+            <Route exact path="/edit/student/:id" component={CreateStudent}/>
+          </Switch>
+        </div>
       </div>
     )
   }

@@ -34,7 +34,7 @@ const Student = db.define('student', {
       min: 0.0,
       max: 4.0,
     }
-  }
+  },
 });
 
 module.exports = Student;

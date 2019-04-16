@@ -25,7 +25,6 @@ class CreateCampus extends Component {
     this.props.history.push('/campuses')
   }
   render(){
-    console.log(this.state);
     return(
       <form onSubmit={this.onSubmit}>
         <div className="form-group">

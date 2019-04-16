@@ -14,7 +14,7 @@ class SingleCampus extends Component {
     return(
       <div>
         {campus ? <div>
-        <div className="card">
+        <div className="card" style={{marginBottom: '20px'}}>
           <img src={campus.imageUrl} className="card-img-top" />
           <div className="card-body">
             <h5 className="card-title">{campus.name}</h5>
