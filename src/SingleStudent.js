@@ -32,7 +32,7 @@ class SingleStudent extends Component {
                 <p>Last Name: {student.lastName}</p>
                 <p>email: {student.email}</p>
                 <p>GPA: {student.gpa}</p>
-                <button type="submit" className="btn btn-sm btn-warning"><Link to={`/edit/student/${student.id}`}>Edit</Link></button>
+                <button type="submit" disabled={true} className="btn btn-sm btn-warning">Edit</button>
               </div>
             </div>
           </div>
